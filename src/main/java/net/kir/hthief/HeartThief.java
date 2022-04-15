@@ -17,6 +17,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.Random;
+
 public class HeartThief implements ModInitializer {
 	public static final String MOD_ID = "hthief";
 
@@ -50,8 +52,9 @@ public class HeartThief implements ModInitializer {
 					EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
 					assert maxHealth != null;
 					maxHealth.setBaseValue(player.getMaxHealth() + 2);
-				} else if (killedEntity instanceof VillagerEntity villagerEntity) {
-					villagerEntity.dropItem(HEART);
+				} else {
+					Random rand = world.getRandom();
+					if (rand.nextInt(100) == 0) killedEntity.dropItem(HEART);
 				}
 			}
 		});

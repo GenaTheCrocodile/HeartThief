@@ -54,7 +54,7 @@ public class HeartThief implements ModInitializer {
 					maxHealth.setBaseValue(player.getMaxHealth() + 2);
 				} else {
 					Random rand = world.getRandom();
-					if (rand.nextInt(100) == 0) killedEntity.dropItem(HEART);
+					if (rand.nextInt(100) < 5) killedEntity.dropItem(HEART);
 				}
 			}
 		});

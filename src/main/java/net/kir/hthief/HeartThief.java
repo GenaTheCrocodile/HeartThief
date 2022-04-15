@@ -7,10 +7,9 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.kir.hthief.item.food.Heart;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -46,12 +45,14 @@ public class HeartThief implements ModInitializer {
 		});
 
 		ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) -> {
-			if (entity instanceof PlayerEntity player && killedEntity instanceof PlayerEntity) {
-				EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-				assert maxHealth != null;
-				maxHealth.setBaseValue(player.getMaxHealth() + 2);
-			} else if (entity instanceof PlayerEntity && killedEntity instanceof TameableEntity tameableEntity){
-				tameableEntity.dropItem(HEART);
+			if (entity instanceof PlayerEntity player) {
+				if (killedEntity instanceof PlayerEntity) {
+					EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+					assert maxHealth != null;
+					maxHealth.setBaseValue(player.getMaxHealth() + 2);
+				} else if (killedEntity instanceof VillagerEntity villagerEntity) {
+					villagerEntity.dropItem(HEART);
+				}
 			}
 		});
 	}

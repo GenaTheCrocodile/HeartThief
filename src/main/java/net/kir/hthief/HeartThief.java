@@ -9,7 +9,6 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -47,11 +46,9 @@ public class HeartThief implements ModInitializer {
 		});
 
 		ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) -> {
-			if (entity instanceof PlayerEntity player) {
+			if (entity instanceof PlayerEntity) {
 				if (killedEntity instanceof PlayerEntity) {
-					EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-					assert maxHealth != null;
-					maxHealth.setBaseValue(player.getMaxHealth() + 2);
+					killedEntity.dropItem(HEART);
 				} else {
 					Random rand = world.getRandom();
 					if (rand.nextInt(100) < 5) killedEntity.dropItem(HEART);

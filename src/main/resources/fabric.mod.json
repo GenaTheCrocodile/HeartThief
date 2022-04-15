@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "hthief",
+  "version": "${version}",
+
+  "name": "Heart Thief",
+  "description": "You can steal people's hearts! (Literally)",
+  "authors": [
+    "Kir"
+  ],
+
+  "icon": "assets/hthief/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.kir.hthief.HeartThief"
+    ]
+  },
+  "mixins": [
+    "hthief.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

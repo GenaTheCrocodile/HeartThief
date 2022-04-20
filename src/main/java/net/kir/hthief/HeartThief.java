@@ -40,6 +40,8 @@ public class HeartThief implements ModInitializer {
 			float oldMaxHealth = oldPlayer.getMaxHealth();
 			if (oldMaxHealth <= 2) {
 				maxHealth.setBaseValue(2);
+			} else if (oldMaxHealth > 20) {
+				maxHealth.setBaseValue(20);
 			} else {
 				maxHealth.setBaseValue(oldPlayer.getMaxHealth() - 2);
 			}

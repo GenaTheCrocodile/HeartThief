@@ -53,7 +53,7 @@ public class HeartThief implements ModInitializer {
 					killedEntity.dropItem(HEART);
 				} else {
 					Random rand = world.getRandom();
-					if (rand.nextInt(100) < 5) killedEntity.dropItem(HEART);
+					if (rand.nextInt(100) < 3) killedEntity.dropItem(HEART);
 				}
 			}
 		});

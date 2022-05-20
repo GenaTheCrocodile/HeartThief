@@ -17,7 +17,8 @@ public class Heart extends Item {
         if (!world.isClient()) {
             EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
             assert maxHealth != null;
-            maxHealth.setBaseValue(player.getMaxHealth() + 2);
+            if (maxHealth.getBaseValue() < 40)
+                maxHealth.setBaseValue(maxHealth.getBaseValue() + 2);
         }
         return super.finishUsing(stack, world, player);
     }
